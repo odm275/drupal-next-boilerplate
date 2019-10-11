@@ -1,1 +1,1 @@
-# prismic-nextjs-boilerplate
+# drupal-nextjs-boilerplate
