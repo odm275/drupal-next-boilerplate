@@ -11,26 +11,21 @@ const GenericPage = props => {
   if (!props.page) {
     return <Error statusCode={404} />;
   }
+  console.log(props.page.data.nodeOne)
   return (
     <div>
-      <Head>
-        <title>{props.page.data.page.meta_title}</title>
-        <link rel="icon" href="/static/favicon.ico" importance="low" />
-        <link
-          rel="stylesheet"
-          href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
-        />
-        <meta name="description" content={props.page.data.page.description} />
-      </Head>
-
       <Nav />
       <Jumbo />
-      <Header as="h1">{props.page.data.page._meta.uid}</Header>
+      <Header as="h1">{props.page.data.nodeOne.title}</Header>
+      <p>
+     { props.page.data.nodeOne.body.value}
+      </p>
     </div>
   );
 };
 
 GenericPage.getInitialProps = async ({ req, res, query }) => {
+  console.log('query',query)
   try {
     const page = await client.query({
       query: PageQuery,
