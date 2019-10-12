@@ -10,6 +10,14 @@ const HomepageQuery = gql`
       }
     }
   }
+  menuByName(name: "main") {
+    links {
+      label
+      url {
+        path
+      }
+    }
+  }
 }
 `;
 

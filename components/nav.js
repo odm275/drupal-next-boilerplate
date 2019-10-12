@@ -1,5 +1,7 @@
 import React from "react";
-import { Menu, Container, Image, Button } from "semantic-ui-react";
+import { Menu, Container, Image } from "semantic-ui-react";
+import Link from 'next/link';
+
 
 const fixedMenuStyle = {
   backgroundColor: "transparent",
@@ -20,7 +22,7 @@ const buttonStyle = {
   margin: "10px"
 };
 
-const Nav = () => (
+const Nav = ({links}) => (
   <Menu borderless fixed="top" style={fixedMenuStyle}>
     <Container>
       <Menu.Menu position="left">
@@ -28,26 +30,14 @@ const Nav = () => (
           <Image size="small" src="/static/logo.svg" />
         </Menu.Item>
       </Menu.Menu>
-
       <Menu.Menu position="right">
-        <Menu.Item as="a" style={linkStyle}>
-          Insurance
-        </Menu.Item>
-        <Menu.Item as="a" style={linkStyle}>
-          Mortgage
-        </Menu.Item>
-        <Menu.Item as="a" style={linkStyle}>
-          Title
-        </Menu.Item>
-        <Menu.Item as="a" style={linkStyle}>
-          Resources
-        </Menu.Item>
-        <Menu.Item as="a" style={linkStyle}>
-          Our Difference
-        </Menu.Item>
-        <Menu.Item as="a" style={{ ...linkStyle, ...buttonStyle }}>
-          Contact Us
-        </Menu.Item>
+        {links.map(link => (
+        <Link href={link.url.path}>
+          <Menu.Item as="a" style={linkStyle}>
+          {link.label}
+          </Menu.Item>
+        </Link>
+      ))}
       </Menu.Menu>
     </Container>
   </Menu>

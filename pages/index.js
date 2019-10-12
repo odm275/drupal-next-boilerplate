@@ -7,6 +7,7 @@ import client from "../utils/drupal";
 import HomepageQuery from "../gql/queries/homepage";
 
 const Home = props => {
+  const links = props.homepage.data.menuByName.links;
   return (
     <div>
       <Head>
@@ -17,7 +18,7 @@ const Home = props => {
         />
       </Head>
 
-      <Nav />
+      <Nav links={links}/>
       <Jumbo />
       <Stats data={props.homepage.data.nodeOne} />
     </div>
