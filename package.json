@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "nodemon server.js",
     "build": "next build",
     "start": "next start"
   },
@@ -13,11 +13,14 @@
     "apollo-client": "^2.6.4",
     "apollo-link-http": "^1.5.16",
     "apollo-link-prismic": "^1.0.4",
+    "express": "^4.17.1",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "isomorphic-fetch": "^2.2.1",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.0.7",
     "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.3",
     "prismic-javascript": "^2.1.1",
     "react": "16.10.1",
     "react-dom": "16.10.1",

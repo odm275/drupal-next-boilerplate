@@ -40,8 +40,8 @@ return(
                 lineHeight: 1.7,
                 fontSize: 16
               }}
-              content={data.body.value}
             />
+            <div dangerouslySetInnerHTML={{__html:data.body.value}}/>
           </Container>
         </Segment>
 

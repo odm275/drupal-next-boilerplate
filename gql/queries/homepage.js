@@ -1,24 +1,36 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 const HomepageQuery = gql`
-{
-  nodeOne: nodeById(id: "7") {
-    ... on NodePage {
-      title
-      body {
-        value
+  query HomepageQuery {
+    nodeById(id: "7") {
+      ...Page
+    }
+    servicesMenu: menuByName(name: "services-menu") {
+      links {
+        label
+        url {
+          path
+        }
+      }
+    }
+    mainMenu: menuByName(name: "main") {
+      links {
+        label
+        url {
+          path
+        }
       }
     }
   }
-  menuByName(name: "main") {
-    links {
-      label
-      url {
-        path
-      }
+  fragment Page on NodePage {
+    title
+    body {
+      value
+    }
+    fieldTextBanner {
+      value
     }
   }
-}
 `;
 
 export default HomepageQuery;
