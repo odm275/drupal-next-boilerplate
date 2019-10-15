@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Dropdown from 'react-select';
 import { Container, Header, Segment } from 'semantic-ui-react';
 import Link from 'next/link';
@@ -40,7 +40,12 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
     'rgba(70,0,0,0.6)',
     'rgba(130,40,0,0.6)'
   ];
-  console.log('servicesMenu', servicesMenu);
+  console.log('useState', useState);
+  const [input, setInput] = useState({
+    name: '',
+    email: '',
+    help: ''
+  });
   return (
     <Container style={containerStyle}>
       <Container text>
@@ -71,6 +76,8 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
           <Segment style={segmentStyle}>
             <div className="ui left icon input">
               <input
+                value={input.name}
+                onChange={setInput}
                 type="text"
                 placeholder="Your Name"
                 style={{ border: 'none' }}
@@ -81,6 +88,8 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
           <Segment style={segmentStyle}>
             <div className="ui left icon input">
               <input
+                value={input.email}
+                onChange={() => setInput({ ...input, email })}
                 type="text"
                 placeholder="Your Email"
                 style={{ border: 'none' }}
@@ -91,7 +100,7 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
           <Segment style={segmentStyle}>
             <Dropdown
               styles={{ container: () => ({ width: '100%' }) }}
-              options={[]}
+              options={['pricing', 'appointment', 'call']}
               onChange={() => null}
               value={null}
               placeholder="How can we help?"
