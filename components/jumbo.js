@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Dropdown from 'react-select';
 import { Container, Header, Segment } from 'semantic-ui-react';
 import Link from 'next/link';
+import client from '../utils/drupal';
 
 const containerStyle = {
   width: '100%',
@@ -40,12 +40,31 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
     'rgba(70,0,0,0.6)',
     'rgba(130,40,0,0.6)'
   ];
-  console.log('useState', useState);
-  const [input, setInput] = useState({
-    name: '',
-    email: '',
-    help: ''
-  });
+
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const handleSubmit = async () => {
+    console.log(name, email);
+    await client.mutation({
+      mutation: `mutation ($input: FormSubmissionInput) {
+        createFormSubmission(input: $input) {
+          entity {
+            entityId
+          }
+          errors
+          violations {
+            message
+          }
+        }
+      }`,
+      variables: {
+        input: {
+          name: name,
+          email: email
+        }
+      }
+    });
+  };
   return (
     <Container style={containerStyle}>
       <Container text>
@@ -76,8 +95,9 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
           <Segment style={segmentStyle}>
             <div className="ui left icon input">
               <input
-                value={input.name}
-                onChange={setInput}
+                value={name}
+                onChange={e => setName(e.target.value)}
+                name="name"
                 type="text"
                 placeholder="Your Name"
                 style={{ border: 'none' }}
@@ -88,8 +108,9 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
           <Segment style={segmentStyle}>
             <div className="ui left icon input">
               <input
-                value={input.email}
-                onChange={() => setInput({ ...input, email })}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                name="email"
                 type="text"
                 placeholder="Your Email"
                 style={{ border: 'none' }}
@@ -98,17 +119,8 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
             </div>
           </Segment>
           <Segment style={segmentStyle}>
-            <Dropdown
-              styles={{ container: () => ({ width: '100%' }) }}
-              options={['pricing', 'appointment', 'call']}
-              onChange={() => null}
-              value={null}
-              placeholder="How can we help?"
-            />
-          </Segment>
-          <Segment style={segmentStyle}>
-            <button style={buttonStyle}>
-              Submit request{' '}
+            <button style={buttonStyle} type="submit" onClick={handleSubmit}>
+              Submit request
               <i aria-hidden="true" className="angle right icon"></i>
             </button>
           </Segment>
@@ -131,7 +143,7 @@ const Jumbo = ({ textBanner, servicesMenu }) => {
             >
               <Container text>
                 <Header as="h2" content={link.label} inverted />
-                <Link href={link.url.path}>
+                <Link href="[page]" as ={link.url.path}>
                   <button style={{ ...buttonStyle, ...{ color: 'white' } }}>
                     {link.label}
                     <i

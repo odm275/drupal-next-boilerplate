@@ -31,7 +31,7 @@ const Nav = ({ links }) => {
     <Menu borderless fixed="top" style={fixedMenuStyle}>
       <Container>
         <Menu.Menu position="left">
-          <Link href={homeLink[0].url.path}>
+          <Link href="[page]" as={homeLink[0].url.path}>
             <Menu.Item>
               <Image size="small" src="/static/logo.svg" />
             </Menu.Item>
@@ -39,7 +39,7 @@ const Nav = ({ links }) => {
         </Menu.Menu>
         <Menu.Menu position="right">
           {navBarLinks.map(link => (
-            <Link href={link.url.path}>
+            <Link href="[page] "as={link.url.path}>
               <Menu.Item as="a" style={linkStyle}>
                 {link.label}
               </Menu.Item>
