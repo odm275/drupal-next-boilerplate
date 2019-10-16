@@ -8,6 +8,7 @@ import PageQuery from '../gql/queries/page';
 import Stats from '../components/stats';
 
 const GenericPage = props => {
+  console.log('generic page props',props)
   const { mainMenu } = props.page.data;
   const { servicesMenu } = props.page.data;
   const { fieldTextBanner } = props.page.data.route.nodeContext;
@@ -43,7 +44,7 @@ GenericPage.getInitialProps = async ({ req, res, query }) => {
     const page = await client.query({
       query: PageQuery,
       variables: {
-        uid: query.slug
+        uid: query.page
       }
     });
 

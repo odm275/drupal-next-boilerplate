@@ -75,9 +75,9 @@ app.prepare().then(() => {
     app.render(req, res, '/homepage');
   });
   server.get('/:page', (req, res) => {
-    const queryParams = { slug: req.params.page };
+    const queryParams = { page: req.params.page };
     //if query params title === fetch(drupal service pages)
-    app.render(req, res, '/page', queryParams);
+    app.render(req, res, '/[page]', queryParams);
   });
 
   server.get('*', async (req, res) => {
